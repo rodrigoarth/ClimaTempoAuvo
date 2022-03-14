@@ -1,0 +1,176 @@
+﻿@model ClimaTempo.ViewModels.TemperaturasViewModel
+
+<div class="jumbotron">
+    <h1>Clima Tempo Simples</h1>
+    <p class="lead">Acompanhe abaixo as informações mais atualizadas sobre o tempo no Brasil.</p>
+</div>
+
+<div class="row">
+    <div class=" card border-info col-sm-6 mb-3" style="max-width: 30rem; padding: 7px; margin-right: 50px">
+        <div class="card-header" style="font-size:18px;">Cidades mais quentes hoje</div>
+        <div class="card-body">
+            <p style="text-align:left" class="card-text">
+                @Model.TempMax[0].Cidade.Nome - @Model.TempMax[0].Clima <span style="float:right">  Max: @Model.TempMax[0].TemperaturaMaxima °C /  Min: @Model.TempMax[0].TemperaturaMinima °C    </span><br />
+            </p>
+            <p style="text-align:left" class="card-text">
+                @Model.TempMax[1].Cidade.Nome - @Model.TempMax[1].Clima <span style="float:right">Max: @Model.TempMax[1].TemperaturaMaxima °C / Min: @Model.TempMax[1].TemperaturaMinima °C </span><br />
+            </p>
+            <p style="text-align:left" class="card-text">
+                @Model.TempMax[2].Cidade.Nome - @Model.TempMax[2].Clima <span style="float:right">Max:  @Model.TempMax[2].TemperaturaMaxima °C / Min: @Model.TempMax[2].TemperaturaMinima °C</span><br />
+            </p>
+        </div>
+    </div>
+    <div class="card border-info mb-3" style="max-width: 30rem; padding:7px">
+        <div class="card-header" style="font-size:18px">Cidades mais frias hoje</div>
+        <div class="card-body">
+            <p style="text-align:left" class="card-text">
+                @Model.TempMin[0].Cidade.Nome - @Model.TempMin[0].Clima <span style="float:right">  Max: @Model.TempMin[0].TemperaturaMaxima °C /  Min: @Model.TempMin[0].TemperaturaMinima °C    </span><br />
+            </p>
+            <p style="text-align:left" class="card-text">
+                @Model.TempMin[1].Cidade.Nome - @Model.TempMin[1].Clima <span style="float:right">Max: @Model.TempMin[1].TemperaturaMaxima °C / Min: @Model.TempMin[1].TemperaturaMinima °C </span><br />
+            </p>
+            <p style="text-align:left" class="card-text">
+                @Model.TempMin[2].Cidade.Nome - @Model.TempMin[2].Clima <span style="float:right">Max:  @Model.TempMin[2].TemperaturaMaxima °C / Min: @Model.TempMin[2].TemperaturaMinima °C</span><br />
+            </p>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <div class="row">
+        <select class="mySelect2" name="Cidade" id="selectCidade">
+            @{ foreach (var item in (List<ClimaTempo.Models.Cidade>)ViewBag.Cidades)
+                {
+                    <option value="@item.Id"> @item.Nome</option>
+
+                }}
+        </select>
+    </div>
+</div>
+
+<button type="button" style="margin-bottom:30px" class="btn btn-outline-primary" id="btnselecionar">Selecionar</button>
+
+<div class="row">
+    <div class="card border-info mb-3" style="display: none; max-width: 10rem; padding: 7px; margin-right: 10px" id="caixaPrevisao">
+        Clima <input style="font-size:20px; font-weight:100;" class="form-control" type="text" id="climaDaCidade" readonly required />
+        Temperatura min<input style="font-size:20px; font-weight:700;" class="form-control" type="text" id="temperaturaMin" readonly required />
+        Temperatura max<input style="font-size:20px; font-weight:700;" class="form-control " type="text" id="temperaturaMax" readonly required />
+        Data da previsão<input style="font-size:20px; font-weight:700;" class="form-control" type="text" id="dataPrevisao" readonly required />
+    </div>
+    <div class="card border-info mb-3" style="display: none; max-width: 10rem; padding: 7px; margin-right: 10px " id="caixaPrevisao2">
+        Clima <input style="font-size:20px; font-weight:100;" class="form-control" type="text" id="climaDaCidade2" readonly required />
+        Temperatura min<input style="font-size:20px; font-weight:700;" class="form-control" type="text" id="temperaturaMin2" readonly required />
+        Temperatura max<input style="font-size:20px; font-weight:700;" class="form-control " type="text" id="temperaturaMax2" readonly required />
+        Data da previsão<input style="font-size:20px; font-weight:700;" class="form-control" type="text" id="dataPrevisao2" readonly required />
+    </div>
+    <div class="card border-info mb-3" style="display: none; max-width: 10rem; padding: 7px; margin-right: 10px " id="caixaPrevisao3">
+        Clima <input style="font-size:20px; font-weight:100;" class="form-control" type="text" id="climaDaCidade3" readonly required />
+        Temperatura min<input style="font-size:20px; font-weight:700;" class="form-control" type="text" id="temperaturaMin3" readonly required />
+        Temperatura max<input style="font-size:20px; font-weight:700;" class="form-control " type="text" id="temperaturaMax3" readonly required />
+        Data da previsão<input style="font-size:20px; font-weight:700;" class="form-control" type="text" id="dataPrevisao3" readonly required />
+    </div>
+    <div class="card border-info mb-3" style="display: none; max-width: 10rem; padding: 7px; margin-right: 10px " id="caixaPrevisao4">
+        Clima <input style="font-size:20px; font-weight:100;" class="form-control" type="text" id="climaDaCidade4" readonly required />
+        Temperatura min<input style="font-size:20px; font-weight:700;" class="form-control" type="text" id="temperaturaMin4" readonly required />
+        Temperatura max<input style="font-size:20px; font-weight:700;" class="form-control " type="text" id="temperaturaMax4" readonly required />
+        Data da previsão<input style="font-size:20px; font-weight:700;" class="form-control" type="text" id="dataPrevisao4" readonly required />
+    </div>
+    <div class="card border-info mb-3" style="display: none; max-width: 10rem; padding: 7px; margin-right: 10px " id="caixaPrevisao5">
+        Clima <input style="font-size:20px; font-weight:100;" class="form-control" type="text" id="climaDaCidade5" readonly required />
+        Temperatura min<input style="font-size:20px; font-weight:700;" class="form-control" type="text" id="temperaturaMin5" readonly required />
+        Temperatura max<input style="font-size:20px; font-weight:700;" class="form-control " type="text" id="temperaturaMax5" readonly required />
+        Data da previsão<input style="font-size:20px; font-weight:700;" class="form-control" type="text" id="dataPrevisao5" readonly required />
+    </div>
+    <div class="card border-info mb-3" style="display: none; max-width: 10rem; padding: 7px; margin-right: 10px " id="caixaPrevisao6">
+        Clima <input style="font-size:20px; font-weight:100;" class="form-control" type="text" id="climaDaCidade6" readonly required />
+        Temperatura min<input style="font-size:20px; font-weight:700;" class="form-control" type="text" id="temperaturaMin6" readonly required />
+        Temperatura max<input style="font-size:20px; font-weight:700;" class="form-control " type="text" id="temperaturaMax6" readonly required />
+        Data da previsão<input style="font-size:20px; font-weight:700;" class="form-control" type="text" id="dataPrevisao6" readonly required />
+    </div>
+    <div class="card border-info mb-3" style="display: none; max-width: 10rem; padding: 7px; " id="caixaPrevisao7">
+        Clima <input style="font-size:20px; font-weight:100;" class="form-control" type="text" id="climaDaCidade7" readonly required />
+        Temperatura min<input style="font-size:20px; font-weight:700;" class="form-control" type="text" id="temperaturaMin7" readonly required />
+        Temperatura max<input style="font-size:20px; font-weight:700;" class="form-control " type="text" id="temperaturaMax7" readonly required />
+        Data da previsão<input style="font-size:20px; font-weight:700;" class="form-control" type="text" id="dataPrevisao7" readonly required />
+    </div>
+</div>
+
+<link href="~/Content/css/select2.min.css" rel="stylesheet" />
+<script src="~/Scripts/select2.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+<script>
+    $(document).ready(function () { $('.mySelect2').select2(); });
+</script>
+<script>
+    $(document).ready(function () {
+        $("#btnselecionar").click(function () {
+            var idCidade = $("#selectCidade").val();
+            $.ajax({
+                type: "POST",
+                dataType: "JSON",
+                url: '/Home/GetData',
+                data: /*JSON.stringify*/{ id: idCidade },
+                beforeSend: function () {
+                    $("#caixaPrevisao").css({ 'display': 'block' })
+                    $("#caixaPrevisao2").css({ 'display': 'block' })
+                    $("#caixaPrevisao3").css({ 'display': 'block' })
+                    $("#caixaPrevisao4").css({ 'display': 'block' })
+                    $("#caixaPrevisao5").css({ 'display': 'block' })
+                    $("#caixaPrevisao6").css({ 'display': 'block' })
+                    $("#caixaPrevisao7").css({ 'display': 'block' })
+                },
+                success: function (results) {
+                    $(results).each(function (index, item) {
+                      
+                        $("#climaDaCidade").val(results[0].Clima)
+                            $("#temperaturaMin").val(results[0].TemperaturaMinima),
+                                $("#temperaturaMax").val(results[0].TemperaturaMaxima),
+                                $("#dataPrevisao").val(results[0].DataPrevisao)
+
+                        $("#climaDaCidade2").val(results[1].Clima)
+                        $("#temperaturaMin2").val(results[1].TemperaturaMinima),
+                            $("#temperaturaMax2").val(results[1].TemperaturaMaxima),
+                            $("#dataPrevisao2").val(results[1].DataPrevisao)
+
+                        $("#climaDaCidade3").val(results[2].Clima)
+                        $("#temperaturaMin3").val(results[2].TemperaturaMinima),
+                            $("#temperaturaMax3").val(results[2].TemperaturaMaxima),
+                            $("#dataPrevisao3").val(results[2].DataPrevisao)
+
+                        $("#climaDaCidade4").val(results[3].Clima)
+                        $("#temperaturaMin4").val(results[3].TemperaturaMinima),
+                            $("#temperaturaMax4").val(results[3].TemperaturaMaxima),
+                            $("#dataPrevisao4").val(results[3].DataPrevisao)
+
+                        $("#climaDaCidade5").val(results[4].Clima)
+                        $("#temperaturaMin5").val(results[4].TemperaturaMinima),
+                            $("#temperaturaMax5").val(results[4].TemperaturaMaxima),
+                            $("#dataPrevisao5").val(results[4].DataPrevisao)
+
+                        $("#climaDaCidade6").val(results[5].Clima)
+                        $("#temperaturaMin6").val(results[5].TemperaturaMinima),
+                            $("#temperaturaMax6").val(results[5].TemperaturaMaxima),
+                            $("#dataPrevisao6").val(results[5].DataPrevisao)
+
+                        $("#climaDaCidade7").val(results[6].Clima)
+                        $("#temperaturaMin7").val(results[6].TemperaturaMinima),
+                            $("#temperaturaMax7").val(results[6].TemperaturaMaxima),
+                            $("#dataPrevisao7").val(results[6].DataPrevisao)
+                    });
+                    
+                },
+                error: function (results) {
+                    alert("Ops, essa ação não pode ser executada, ou tivemos algum erro, tente novamente mais tarde.")
+                    
+                }
+            }).done(function (results) {
+                
+                
+            }).fail(function (results) {
+                alert("Ops, essa ação não pode ser executada, ou tivemos algum erro, tente novamente mais tarde.")
+                
+            });
+        }
+        )
+    })
+</script>
